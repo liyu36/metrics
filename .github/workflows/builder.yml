@@ -18,8 +18,8 @@ jobs:
         with:
           registry: registry.cn-hangzhou.aliyuncs.com
           image: liy36/metrics
-          tags: ${GITHUB_REF#refs/*/}
-          dockerfile: "ci/Diockerfile"
+          tags: latest
+          dockerfile: ci/Dockerfile
           username: ${{ secrets.REGISTRY_LOGIN }}
           password: ${{ secrets.REGISTRY_TOKEN }}
 # steps:
