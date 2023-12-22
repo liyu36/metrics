@@ -10,5 +10,5 @@ RUN CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -o main main.go
 # FROM scratch
 FROM registry.cn-hangzhou.aliyuncs.com/liy36/alpine:3.15
 WORKDIR /app
-COPY --from=builder /app/metrics /app/main
+COPY --from=builder /app/main /app/metrics
 CMD ["/app/metrics"]
