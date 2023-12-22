@@ -25,7 +25,7 @@ var (
 
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
-	flag.StringVar(&listen, "listen", "127.0.0.1:9001", "listen port")
+	flag.StringVar(&listen, "listen", ":9001", "listen port")
 	flag.IntVar(&metrics, "metrics", 10000, "metric number")
 	flag.IntVar(&length, "length", 25, "metric name length")
 	flag.IntVar(&labels, "labels", 3, "label number")
@@ -75,7 +75,6 @@ func main() {
 	log.Printf("labbel key length is: %d", key)
 	log.Printf("labbel value length is: %d", value)
 	log.Printf("metric mac value is: %d", max)
-	log.Printf("please check endpoint \"http://%s/metrics\"", listen)
 
 	go func() {
 		log.Println(http.ListenAndServe(":9000", nil))
