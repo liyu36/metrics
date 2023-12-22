@@ -31,7 +31,7 @@ func init() {
 	flag.IntVar(&labels, "labels", 3, "label number")
 	flag.IntVar(&key, "key", 15, "label key length")
 	flag.IntVar(&value, "value", 25, "label value length")
-	flag.IntVar(&max, "max", 1e8, "metric max value")
+	flag.IntVar(&max, "max", 10000, "metric max value")
 	flag.Parse()
 }
 
