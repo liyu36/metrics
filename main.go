@@ -49,22 +49,31 @@ func generateLabels(prefix string, length int, index int) (result []string) {
 }
 
 func generateMetric() {
+	gauges := make([]prometheus.Gauge, metrics)
+
 	for i := 0; i < metrics; i++ {
-		g := prometheus.NewGaugeVec(
+		gauge := prometheus.NewGaugeVec(
 			prometheus.GaugeOpts{
 				Name: generate("metric", length, i),
 			},
 			generateLabels("key", key, i),
 		).WithLabelValues(generateLabels("value", value, i)...)
-		go func(g prometheus.Gauge) {
-			prometheus.MustRegister(g)
-			for {
+		gauges[i] = gauge
+	}
+
+	go func(gauges []prometheus.Gauge) {
+		for i := range gauges {
+			prometheus.MustRegister(gauges[i])
+		}
+
+		for {
+			for i := range gauges {
 				r := rand.New(rand.NewSource(time.Now().UnixNano()))
-				g.Set(float64(r.Intn(value)))
+				gauges[i].Set(float64(r.Intn(value)))
 				time.Sleep(time.Minute)
 			}
-		}(g)
-	}
+		}
+	}(gauges)
 }
 
 func main() {
