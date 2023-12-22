@@ -22,7 +22,6 @@ jobs:
           dockerfile: "ci/Diockerfile"
           username: ${{ secrets.REGISTRY_LOGIN }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-          tag: ${GITHUB_REF#refs/*/}
 # steps:
 #   - uses: actions/checkout@v3
 #     name: Check out code
