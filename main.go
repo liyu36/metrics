@@ -70,8 +70,8 @@ func generateMetric() {
 			for i := range gauges {
 				r := rand.New(rand.NewSource(time.Now().UnixNano()))
 				gauges[i].Set(float64(r.Intn(max)))
-				time.Sleep(time.Minute)
 			}
+			time.Sleep(time.Minute)
 		}
 	}(gauges)
 }
